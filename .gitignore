@@ -1,0 +1,20 @@
+# Terraform: local state and real settings hold secrets
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+
+# Keys and credentials
+*.pem
+*.key
+.env
+
+# Ansible: the real inventory holds a server address
+inventory.ini
+*.retry
+
+# Database dumps: ignore all except the simulated sample backup
+*.sql
+!database/company_backup.sql

@@ -1,0 +1,17 @@
+# Copy this file to terraform.tfvars and fill in your own values.
+# terraform.tfvars is ignored by Git because it holds the database password.
+
+aws_region          = "us-east-1"
+vpc_cidr            = "10.0.0.0/16"
+public_subnet_cidr  = "10.0.1.0/24"
+private_subnet_cidr = "10.0.2.0/24"
+
+key_name    = "your-ec2-key-pair-name"
+db_name     = "company_db"
+db_username = "admin"
+db_password = "CHANGE_ME"
+
+instance_type = "t2.micro"
+
+# S3 bucket names are unique across all of AWS, so pick one nobody else has.
+bucket_name = "your-unique-migration-bucket-name"

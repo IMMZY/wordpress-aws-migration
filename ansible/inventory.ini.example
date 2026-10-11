@@ -1,0 +1,7 @@
+# Copy this file to inventory.ini and fill in your own values.
+# inventory.ini is ignored by Git because it holds a real server address.
+# Use the full path to the key. On WSL, keep the key inside the Linux
+# filesystem (for example ~/.ssh), not on a mounted Windows drive.
+
+[wordpress]
+EC2_PUBLIC_IP ansible_user=ubuntu ansible_ssh_private_key_file=/home/YOUR_USER/.ssh/YOUR_KEY.pem

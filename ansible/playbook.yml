@@ -1,0 +1,46 @@
+---
+# The values under "vars" are placeholders. Pass the real ones at run time:
+#
+#   ansible-playbook -i inventory.ini playbook.yml \
+#     -e db_password='...' -e rds_endpoint='...'
+#
+# Never commit a real password or database address to this file.
+- hosts: wordpress
+  become: yes
+  vars:
+    db_name: company_db
+    db_username: admin
+    db_password: CHANGE_ME
+    rds_endpoint: CHANGE_ME
+
+  tasks:
+    - name: Update packages
+      apt:
+        update_cache: yes
+
+    - name: Install Apache, PHP, MySQL client, unzip, wget
+      apt:
+        name:
+          - apache2
+          - php
+          - php-mysql
+          - mysql-client
+          - unzip
+          - wget
+        state: present
+
+    - name: Download WordPress
+      get_url:
+        url: https://wordpress.org/latest.zip
+        dest: /tmp/latest.zip
+
+    - name: Unzip WordPress
+      unarchive:
+        src: /tmp/latest.zip
+        dest: /var/www/html/
+        remote_src: yes
+
+    - name: Apply WordPress config
+      template:
+        src: wp-config.php.j2
+        dest: /var/www/html/wordpress/wp-config.php
